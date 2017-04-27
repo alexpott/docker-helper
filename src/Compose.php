@@ -149,6 +149,22 @@ class Compose extends DockerBase
     }
 
     /**
+     * Stops containers and removes containers, networks, volumes, and images created by up.
+     *
+     * @param bool|false $remove_volumes
+     * @return mixed
+     * @throws \Exception
+     */
+    public static function down($remove_volumes = false)
+    {
+        $args = [];
+        if ($remove_volumes) {
+            $args[] = '-v';
+        }
+        return self::runCommand('down', $args);
+    }
+
+    /**
      * Start services.
      *
      * @return mixed
